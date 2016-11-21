@@ -1,0 +1,46 @@
+
+This is a continuation of the last tutorial(AngularJS Partial Template).
+
+In this Tutorial we are going to discuss configuring routes and creating controllers.
+Right click on the Scripts folder and add a new JavaScript file. Name it script.js. Copy and paste the following code.
+
+/// <reference path="angular.min.js" />
+
+var app = angular
+            .module("Demo", ["ngRoute"])
+            .config(function ($routeProvider) {
+                $routeProvider
+                    .when("/home", {
+                        templateUrl: "Templetes/home.html",
+                        controller: "homeController"
+                    })
+                    .when("/courses", {
+                        templateUrl: "Templetes/courses.html",
+                        controller: "coursesController"
+                    })
+                    .when("/student", {
+                        templateUrl: "Templetes/student.html",
+                        controller: "studentController"
+                    })
+            })
+            .controller("homeController", function ($scope) {
+                $scope.message = "Home Page";
+            })
+            .controller("coursesController", function ($scope) {
+                $scope.courses = ["C#", "VB.NET", "ASP.NET", "SQL Server","JAVA","PHP","C++"];
+            })
+			.controller("studentController",function($scope){
+					$scope.students = ["Mary","John","Mark","Samuel","James","Mathew","Paul"];
+			})
+			
+Changes to index.html
+
+Add a reference to the script.js file in the layout template i.e index.html.
+<script src="Scripts/script.js"></script>
+
+Set ng-app="Demo" on the root html element
+<html ng-app="Demo">
+
+At this point, depending on the URL, the respective partial template will be injected into the layout template in the location where we have ng-view directive. For example if you have index.html#/home, then home.html is injected into index.html. Similarly if you are on index.html#/courses, then course.html is injected into index.html.
+
+In the Next Tutorial we are going to discuss on how to remove the Hash from the URL.ie(Remove # from URL AngularJS)
